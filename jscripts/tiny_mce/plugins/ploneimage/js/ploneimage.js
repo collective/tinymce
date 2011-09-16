@@ -504,7 +504,7 @@ ImageDialog.prototype.getFolderListing = function (context_url, method) {
                                 jq.merge(item_html, [
                                     '<div class="width-1:' + col_items_number + ' cell position-' + item_number % col_items_number * (16 / col_items_number) + '">',
                                         '<div class="thumbnail item ' + (i % 2 === 0 ? 'even' : 'odd') + '" title="' + item.description +  '">',
-                                            '<div style="width: ' + thumb_width + 'px; height: ' + thumb_height + 'px" class="thumb">',
+                                            '<div class="thumb">',
                                                 '<img src="' + item.url + '/@@images/image/' + thumb_name + '" alt="' + item.title + '" />',
                                             '</div>',
                                             '<p>' + item.title + '</p>',
@@ -692,7 +692,6 @@ ImageDialog.prototype.getAbsoluteUrl = function (base, link) {
 
 ImageDialog.prototype.displayUploadPanel = function() {
     jq('#general_panel', document).width(530);
-    jq('#general_panel #searchtext', document).width(526);
     jq('#addimage_panel', document).removeClass('hide');
     jq('#details_panel', document).addClass("hide");
     jq('#internallinkcontainer input', document).attr('checked', false);
@@ -701,7 +700,6 @@ ImageDialog.prototype.displayUploadPanel = function() {
 
 ImageDialog.prototype.displayPreviewPanel = function() {
     jq('#general_panel', document).width(530);
-    jq('#general_panel #searchtext', document).width(526);
     jq('#addimage_panel', document).addClass('hide');
     jq('#details_panel', document).removeClass("hide");
     if (this.is_search_activated !== true) {
@@ -712,7 +710,6 @@ ImageDialog.prototype.displayPreviewPanel = function() {
 
 ImageDialog.prototype.hidePanels = function() {
     jq('#general_panel', document).width(790);
-    jq('#general_panel #searchtext', document).width(786);
     jq('#addimage_panel', document).addClass('hide');
     jq('#details_panel', document).addClass("hide");
 };
