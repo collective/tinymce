@@ -9,7 +9,7 @@
 #addimage_panel h2 { margin-bottom: 6px }
 #addimage_panel #uploadtitle { height: 20px; margin-bottom: 2px;}
 #addimage_panel #uploaddescription { padding-left: 4px; }
-#details_panel div.radioscrolllist { height: 333px; padding: 4px }
+#details_panel div.radioscrolllist { height: 329px; padding: 4px }
 #addimage_panel input, #addimage_panel textarea { width: 100%; }
 #addimage_panel #upload_iframe { display: none; }
 #searchtext { width: 100%; height: 20px; border: 1px solid #CCC; margin-bottom: 5px; }
