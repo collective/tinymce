@@ -78,7 +78,7 @@ function insertTable() {
 		}
 
 		dom.setAttrib(elm, 'align', align);
-		dom.setAttrib(elm, 'tframe', frame);
+		dom.setAttrib(elm, 'frame', frame);
 		dom.setAttrib(elm, 'rules', rules);
 		dom.setAttrib(elm, 'class', className);
 		dom.setAttrib(elm, 'style', style);
@@ -247,8 +247,12 @@ function insertTable() {
 		inst.execCommand('mceInsertContent', false, html);
 
 	tinymce.each(dom.select('table[data-mce-new]'), function(node) {
-		var tdorth = dom.select('td,th', node);
+		// Fixes a bug in IE where the caret cannot be placed after the table if the table is at the end of the document
+		if (tinymce.isIE && node.nextSibling == null) {
+			dom.insertAfter(dom.create('p'), node);
+		}
 
+		var tdorth = dom.select('td,th', node);
 		try {
 			// IE9 might fail to do this selection 
 			inst.selection.setCursorLocation(tdorth[0], 0);
@@ -303,6 +307,15 @@ function init() {
 	var formObj = document.forms[0];
 	var elm = dom.getParent(inst.selection.getNode(), "table");
 
+	/*
+	 * hide class selection
+	 */
+	var classElement = dom.select('#general_panel>div:first', formObj);
+	if (classElement!=null && classElement!=undefined && classElement.length>0) {
+		dom.hide(classElement);
+	}
+
+
 	action = tinyMCEPopup.getWindowArg('action');
 
 	if (!action)
@@ -350,7 +363,7 @@ function init() {
 
 	// Update form
 	selectByValue(formObj, 'align', align);
-	selectByValue(formObj, 'frame', frame);
+	selectByValue(formObj, 'tframe', frame);
 	selectByValue(formObj, 'rules', rules);
 	selectByValue(formObj, 'class', className, true, true);
 	formObj.cols.value = cols;
@@ -438,6 +451,8 @@ function changedBorder() {
 			st['border-width'] = '';
 		}
 	}
+
+	formObj.style.value = dom.serializeStyle(st);
 }
 
 function changedColor() {
