@@ -5,5 +5,8 @@ HISTORY
 3.4.3-plone
 -----------
 
+- More stable table plugin; IE9 fixes
+  [joka]
+
 - Fix transparent line appearing in popups near the title 
   [iElectric]
